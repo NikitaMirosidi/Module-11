@@ -1,6 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Task2 {
-    int digit = 0;
-    boolean incrementDone = false;
+    public volatile int digit = 0;
+    public volatile boolean incrementDone = false;
+    public List<String> line = new ArrayList<>();
 
     public void function(int capacity) {
 
@@ -50,32 +55,45 @@ public class Task2 {
         b.start();
         c.start();
         d.start();
+
+        try {
+            counter.join();
+            a.join();
+            b.join();
+            c.join();
+            d.join();
+        } catch (InterruptedException e) {
+            System.out.println("Ошибочка прерывания");
+        }
+
+        System.out.println(line.stream()
+                .collect(Collectors.joining(", ")));
     }
 
     public void fizz(int digit) {
         if (digit % 3 == 0 && digit % 5 != 0) {
-            System.out.print("fizz");
+            line.add("fizz");
             incrementDone = false;
         }
     }
 
     public void buzz(int digit) {
         if (digit % 5 == 0 && digit % 3 != 0) {
-            System.out.print("buzz");
+            line.add("buzz");
             incrementDone = false;
         }
     }
 
     public void fizzbuzz(int digit) {
         if (digit % 3 == 0 && digit % 5 == 0) {
-            System.out.print("fizzbuzz");
+            line.add("fizzbuzz");
             incrementDone = false;
         }
     }
 
     public void number(int digit) {
         if (digit % 3 != 0 && digit % 5 != 0) {
-            System.out.print(digit);
+            line.add(Integer.toString(digit));
             incrementDone = false;
         }
     }
