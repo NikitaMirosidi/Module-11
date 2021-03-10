@@ -63,28 +63,28 @@ public class Task2 {
 
     public void fizz(int digit) {
         if (digit % 3 == 0 && digit % 5 != 0) {
-            System.out.println("fizz");
+            System.out.print("fizz");
             booler();
         }
     }
 
     public void buzz(int digit) {
         if (digit % 5 == 0 && digit % 3 != 0) {
-            System.out.println("buzz");
+            System.out.print("buzz");
             booler();
         }
     }
 
     public void fizzbuzz(int digit) {
         if (digit % 3 == 0 && digit % 5 == 0) {
-            System.out.println("fizzbuzz");
+            System.out.print("fizzbuzz");
             booler();
         }
     }
 
     public void number(int digit) {
         if (digit % 3 != 0 && digit % 5 != 0) {
-            System.out.println(digit);
+            System.out.print(digit);
             booler();
         }
     }
