@@ -10,7 +10,7 @@ public class Task2 {
     public void function(int capacity) {
 
         Thread counter = new Thread(() -> {
-            while (digit < capacity) {
+            while (digit <= capacity) {
                 if (!incrementDone) {
                     digit++;
                     incrementDone = true;
@@ -19,7 +19,7 @@ public class Task2 {
         });
 
         Thread a = new Thread(() -> {
-            while (digit < capacity) {
+            while (digit <= capacity) {
                 if (incrementDone) {
                     fizz(digit);
                 }
@@ -27,7 +27,7 @@ public class Task2 {
         });
 
         Thread b = new Thread(() -> {
-            while (digit < capacity) {
+            while (digit <= capacity) {
                  if (incrementDone) {
                      buzz(digit);
                  }
@@ -35,7 +35,7 @@ public class Task2 {
         });
 
         Thread c = new Thread(() -> {
-            while (digit < capacity) {
+            while (digit <= capacity) {
                 if (incrementDone) {
                     fizzbuzz(digit);
                 }
@@ -43,7 +43,7 @@ public class Task2 {
         });
 
         Thread d = new Thread(() -> {
-            while (digit < capacity) {
+            while (digit <= capacity) {
                 if (incrementDone) {
                     number(digit);
                 }
@@ -67,6 +67,7 @@ public class Task2 {
         }
 
         System.out.println(line.stream()
+                .limit(capacity)
                 .collect(Collectors.joining(", ")));
     }
 
