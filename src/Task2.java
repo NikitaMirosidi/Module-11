@@ -1,27 +1,21 @@
 public class Task2 {
     int digit = 0;
-    boolean counterDone = false;
-    boolean aDone = true;
-    boolean bDone = true;
-    boolean cDone = true;
-    boolean dDone = true;
+    boolean incrementDone = false;
 
     public void function(int capacity) {
 
         Thread counter = new Thread(() -> {
             while (digit < capacity) {
-                if (!counterDone && aDone && bDone ) {
+                if (!incrementDone) {
                     digit++;
-                    counterDone = true;
-                    aDone = bDone = cDone = dDone = false;
+                    incrementDone = true;
                 }
             }
         });
 
         Thread a = new Thread(() -> {
             while (digit < capacity) {
-                if (counterDone && !aDone) {
-                    aDone = true;
+                if (incrementDone) {
                     fizz(digit);
                 }
             }
@@ -29,17 +23,15 @@ public class Task2 {
 
         Thread b = new Thread(() -> {
             while (digit < capacity) {
-                if (counterDone && !bDone) {
-                    bDone = true;
-                    buzz(digit);
-                }
+                 if (incrementDone) {
+                     buzz(digit);
+                 }
             }
         });
 
         Thread c = new Thread(() -> {
             while (digit < capacity) {
-                if (counterDone && !cDone) {
-                    cDone = true;
+                if (incrementDone) {
                     fizzbuzz(digit);
                 }
             }
@@ -47,8 +39,7 @@ public class Task2 {
 
         Thread d = new Thread(() -> {
             while (digit < capacity) {
-                if (counterDone && !dDone) {
-                    dDone = true;
+                if (incrementDone) {
                     number(digit);
                 }
             }
@@ -64,33 +55,28 @@ public class Task2 {
     public void fizz(int digit) {
         if (digit % 3 == 0 && digit % 5 != 0) {
             System.out.print("fizz");
-            booler();
+            incrementDone = false;
         }
     }
 
     public void buzz(int digit) {
         if (digit % 5 == 0 && digit % 3 != 0) {
             System.out.print("buzz");
-            booler();
+            incrementDone = false;
         }
     }
 
     public void fizzbuzz(int digit) {
         if (digit % 3 == 0 && digit % 5 == 0) {
             System.out.print("fizzbuzz");
-            booler();
+            incrementDone = false;
         }
     }
 
     public void number(int digit) {
         if (digit % 3 != 0 && digit % 5 != 0) {
             System.out.print(digit);
-            booler();
+            incrementDone = false;
         }
-    }
-
-    public void booler() {
-        aDone = bDone = cDone = dDone = true;
-        counterDone = false;
     }
 }
